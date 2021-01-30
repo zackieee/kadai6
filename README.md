@@ -13,15 +13,8 @@ CORSを理解する
 ```
 $ node ./bin/www
 ```
-5. ngrokをインストールする  
-参考：https://qiita.com/hirokisoccer/items/7033c1bb9c85bf6789bd  
 
-6. ターミナルから以下のコマンドを実行  
-　 表示されるhttpのURLを控えておく（kadai6-2で使用します）  
-```
-$ ngrok http localhost:3000  
-```
-  
+5. ブラウザで`http://localhost:3000`にアクセスする(kadai6-2との挙動比較用)  
   
 **<CORSヘッダーの設定>**  
 下記の指定になっています。
@@ -29,3 +22,21 @@ $ ngrok http localhost:3000
 Access-Control-Allow-Origin：http://localhost:3000
 Access-Control-Allow-Method：POST
 ```
+
+## ボタン押下時の動作について  
+`http://localhost:3000`ページ表示時の動作  
+
+[シンプルリクエスト]   
+　メソッド：POST　コンテンツタイプ：application/x-www-form-urlencoded  
+　→　同一ドメインのため、問題なく処理が完了する  
+ 　　`結果:POST処理が正常に終了しました`
+
+[プリフライトが必要]  
+　メソッド：POST　コンテンツタイプ：application/json  
+　→ 同一ドメインのため、プリフライトチェックは行われない  
+ 　 `結果:POST処理が正常に終了しました`
+
+[PUTメソッドの送信]  
+　メソッド：PUT　コンテンツタイプ：application/json  
+　→　同一ドメインのため、プリフライトチェックは行われない／CORSでのメソッド制御の対象ともならない
+ 　　`結果:PUT処理が正常に終了しました`
