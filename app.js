@@ -12,6 +12,7 @@ const app = express();
 const corsOptions = {
   "origin": "http://localhost:3001",
   "methods": "POST",
+  "credentials": true,
 }
 
 // view engine setup
